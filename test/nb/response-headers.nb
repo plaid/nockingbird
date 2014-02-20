@@ -1,0 +1,5 @@
+>> GET /
+<< 200
+<<   content-type: text/plain
+<<   content-length: 4
+<< =hai!

@@ -1,0 +1,27 @@
+>> GET /
+<< 200
+<< =GET request successful
+
+>> POST /
+<< 200
+<< =POST request successful
+
+>> PUT /
+<< 200
+<< =PUT request successful
+
+>> HEAD /
+<< 200
+<< =
+
+>> PATCH /
+<< 200
+<< =PATCH request successful
+
+>> MERGE /
+<< 200
+<< =MERGE request successful
+
+>> DELETE /
+<< 200
+<< =DELETE request successful
