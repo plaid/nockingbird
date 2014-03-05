@@ -1,6 +1,6 @@
 {
   "name": "nockingbird",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Declarative HTTP mocking (for use with Nock)",
   "tags": ["http", "mock", "nock", "test"],
   "author": "David Chambers <david@plaid.com>",
