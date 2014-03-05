@@ -58,7 +58,7 @@ exports.mock = (scope, chunk, root) ->
 
 
 exports.load = (scope, filename, root) ->
-  fs.readFileSync filename, encoding: 'utf8'
+  fs.readFileSync filename, 'utf8'
   .replace /^\s*--.*$\n?/gm, ''
   .split /\n{2,}/
   .forEach _.partial exports.mock, scope, _, root
