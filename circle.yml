@@ -1,0 +1,7 @@
+dependencies:
+  override:
+    - make setup
+
+test:
+  override:
+    - make test
