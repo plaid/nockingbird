@@ -5,6 +5,10 @@
   "tags": ["http", "mock", "nock", "test"],
   "author": "David Chambers <david@plaid.com>",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/plaid/nockingbird.git"
+  },
   "main": "./lib/nockingbird",
   "dependencies": {
     "underscore": "1.6.x"
