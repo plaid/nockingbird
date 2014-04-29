@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+rm -f   lib/nockingbird.js
+make    lib/nockingbird.js
+git add lib/nockingbird.js
