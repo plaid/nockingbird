@@ -1,6 +1,6 @@
 COFFEE = node_modules/.bin/coffee
 MOCHA = node_modules/.bin/mocha --compilers coffee:coffee-script/register
-SEMVER = node_modules/.bin/semver
+XYZ = node_modules/.bin/xyz --message X.Y.Z --tag X.Y.Z --script scripts/prepublish
 
 JS_FILES = $(patsubst src/%.coffee,lib/%.js,$(shell find src -type f))
 
@@ -18,15 +18,12 @@ clean:
 
 
 .PHONY: release-patch release-minor release-major
-VERSION = $(shell node -p 'require("./package.json").version')
-release-patch: NEXT_VERSION = $(shell $(SEMVER) -i patch $(VERSION))
-release-minor: NEXT_VERSION = $(shell $(SEMVER) -i minor $(VERSION))
-release-major: NEXT_VERSION = $(shell $(SEMVER) -i major $(VERSION))
+release-patch: LEVEL = patch
+release-minor: LEVEL = minor
+release-major: LEVEL = major
 
 release-patch release-minor release-major:
-	sed -i '' 's/"version": "[^"]*"/"version": "$(NEXT_VERSION)"/' package.json
-	git commit --all --message "$(NEXT_VERSION)"
-	git tag --annotate "$(NEXT_VERSION)" --message "$(NEXT_VERSION)"
+	@$(XYZ) --increment $(LEVEL)
 
 
 .PHONY: setup
