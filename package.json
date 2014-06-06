@@ -1,10 +1,14 @@
 {
   "name": "nockingbird",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Declarative HTTP mocking (for use with Nock)",
-  "tags": ["http", "mock", "nock", "test"],
+  "tags": [
+    "http",
+    "mock",
+    "nock",
+    "test"
+  ],
   "author": "David Chambers <david@plaid.com>",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/plaid/nockingbird.git"
