@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-rm -f   lib/nockingbird.js
-make    lib/nockingbird.js
-git add lib/nockingbird.js
+rm -f                                   lib/nockingbird.js
+make                                    lib/nockingbird.js
+git update-index --no-assume-unchanged  lib/nockingbird.js
+git add                                 lib/nockingbird.js
+git update-index --assume-unchanged     lib/nockingbird.js

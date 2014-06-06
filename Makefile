@@ -2,11 +2,12 @@ COFFEE = node_modules/.bin/coffee
 MOCHA = node_modules/.bin/mocha --compilers coffee:coffee-script/register
 XYZ = node_modules/.bin/xyz --message X.Y.Z --tag X.Y.Z --script scripts/prepublish
 
-JS_FILES = $(patsubst src/%.coffee,lib/%.js,$(shell find src -type f))
+SRC = $(shell find src -name '*.coffee')
+LIB = $(patsubst src/%.coffee,lib/%.js,$(SRC))
 
 
 .PHONY: all
-all: $(JS_FILES)
+all: $(LIB)
 
 lib/%.js: src/%.coffee
 	$(COFFEE) --compile --output $(@D) -- $<
@@ -14,7 +15,7 @@ lib/%.js: src/%.coffee
 
 .PHONY: clean
 clean:
-	rm -f -- $(JS_FILES)
+	rm -f -- $(LIB)
 
 
 .PHONY: release-patch release-minor release-major
@@ -29,6 +30,8 @@ release-patch release-minor release-major:
 .PHONY: setup
 setup:
 	npm install
+	make clean
+	git update-index --assume-unchanged -- $(LIB)
 
 
 .PHONY: test
