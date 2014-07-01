@@ -21,6 +21,6 @@
     "coffee-script": "1.7.x",
     "mocha": "1.17.x",
     "nock": "0.27.x",
-    "xyz": "0.3.x"
+    "xyz": "0.4.x"
   }
 }
