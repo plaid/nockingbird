@@ -85,3 +85,8 @@ describe 'nockingbird.load', ->
     , (err) ->
       err.constructor is Error and
       err.message is 'Invalid request method "get"'
+
+  it 'ensures status code is a number', ->
+    scope = new Scope
+    nockingbird.load scope, __dirname + '/nb/hello-world.nb'
+    assert.strictEqual scope.__log__[1][1], 200
