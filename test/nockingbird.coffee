@@ -70,6 +70,11 @@ describe 'nockingbird.load', ->
       ['reply', 200, '--two--', {}]
     ]
 
+  it 'parses empty.nb', ->
+    scope = new Scope
+    nockingbird.load scope, __dirname + '/nb/empty.nb'
+    assert.deepEqual scope.__log__, []
+
   it 'throws while parsing invalid-chunk.nb', ->
     scope = new Scope
     assert.throws ->

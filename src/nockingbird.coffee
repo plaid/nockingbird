@@ -61,5 +61,6 @@ exports.load = (scope, filename, root) ->
   fs.readFileSync filename, 'utf8'
   .replace /^\s*--.*$\n?/gm, ''
   .split /\n{2,}/
+  .filter Boolean
   .forEach _.partial exports.mock, scope, _, root
   return
