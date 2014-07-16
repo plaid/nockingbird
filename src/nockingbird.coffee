@@ -46,7 +46,7 @@ exports.mock = (scope, chunk, root) ->
     pathname
     [form_data_lines.join '&'].filter(Boolean)...
   )[if filename? then 'replyWithFile' else 'reply'](
-    status_code_line
+    Number status_code_line
     if filename?
       path.resolve root, filename
     else
