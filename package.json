@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "coffee-script": "1.7.x",
-    "mocha": "1.17.x",
+    "mocha": "1.21.x",
     "nock": "0.27.x",
     "xyz": "0.4.x"
   }
