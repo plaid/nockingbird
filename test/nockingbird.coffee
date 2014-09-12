@@ -15,7 +15,7 @@ describe 'nockingbird.load', ->
 
   it 'parses hello-world.nb', ->
     scope = new Scope
-    nockingbird.load scope, __dirname + '/nb/hello-world.nb'
+    nockingbird.load scope, "#{__dirname}/nb/hello-world.nb"
     assert.deepEqual scope.__log__, [
       ['get', '/']
       ['reply', 200, 'Hello, world!', {}]
@@ -23,7 +23,7 @@ describe 'nockingbird.load', ->
 
   it 'parses response-headers.nb', ->
     scope = new Scope
-    nockingbird.load scope, __dirname + '/nb/response-headers.nb'
+    nockingbird.load scope, "#{__dirname}/nb/response-headers.nb"
     assert.deepEqual scope.__log__, [
       ['get', '/']
       ['reply', 200, 'hai!', {
@@ -34,7 +34,7 @@ describe 'nockingbird.load', ->
 
   it 'parses request-methods.nb', ->
     scope = new Scope
-    nockingbird.load scope, __dirname + '/nb/request-methods.nb'
+    nockingbird.load scope, "#{__dirname}/nb/request-methods.nb"
     assert.deepEqual scope.__log__, [
       ['get', '/']
       ['reply', 200, 'GET request successful', {}]
@@ -54,7 +54,7 @@ describe 'nockingbird.load', ->
 
   it 'parses reply-with-file.nb', ->
     scope = new Scope
-    nockingbird.load scope, __dirname + '/nb/reply-with-file.nb', '/tmp'
+    nockingbird.load scope, "#{__dirname}/nb/reply-with-file.nb", '/tmp'
     assert.deepEqual scope.__log__, [
       ['get', '/']
       ['replyWithFile', 200, '/tmp/index.html', {}]
@@ -62,7 +62,7 @@ describe 'nockingbird.load', ->
 
   it 'parses comments.nb', ->
     scope = new Scope
-    nockingbird.load scope, __dirname + '/nb/comments.nb'
+    nockingbird.load scope, "#{__dirname}/nb/comments.nb"
     assert.deepEqual scope.__log__, [
       ['get', '/1']
       ['reply', 200, '--one--', {}]
@@ -72,13 +72,13 @@ describe 'nockingbird.load', ->
 
   it 'parses empty.nb', ->
     scope = new Scope
-    nockingbird.load scope, __dirname + '/nb/empty.nb'
+    nockingbird.load scope, "#{__dirname}/nb/empty.nb"
     assert.deepEqual scope.__log__, []
 
   it 'throws while parsing invalid-chunk.nb', ->
     scope = new Scope
     assert.throws ->
-      nockingbird.load scope, __dirname + '/nb/invalid-chunk.nb'
+      nockingbird.load scope, "#{__dirname}/nb/invalid-chunk.nb"
     , (err) ->
       err.constructor is SyntaxError and
       err.message is 'Invalid chunk (lines must begin with ">>" or "<<")'
@@ -86,12 +86,12 @@ describe 'nockingbird.load', ->
   it 'throws while parsing invalid-request-method.nb', ->
     scope = new Scope
     assert.throws ->
-      nockingbird.load scope, __dirname + '/nb/invalid-request-method.nb'
+      nockingbird.load scope, "#{__dirname}/nb/invalid-request-method.nb"
     , (err) ->
       err.constructor is Error and
       err.message is 'Invalid request method "get"'
 
   it 'ensures status code is a number', ->
     scope = new Scope
-    nockingbird.load scope, __dirname + '/nb/hello-world.nb'
+    nockingbird.load scope, "#{__dirname}/nb/hello-world.nb"
     assert.strictEqual scope.__log__[1][1], 200
