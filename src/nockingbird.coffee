@@ -1,10 +1,10 @@
 fs = require 'fs'
 path = require 'path'
 
-_ = require 'underscore'
+R = require 'ramda'
 
 
-is_method_name = _.partial _.contains, [
+is_method_name = R.rPartial R.contains, [
   'GET'
   'POST'
   'PUT'
@@ -51,8 +51,11 @@ exports.mock = (scope, chunk, root) ->
       path.resolve root, filename
     else
       response_body_lines.join '\n'
-    _.object _.map response_header_lines,
-                   _.compose _.rest, RegExp::exec.bind /^([^:]*):[ ]*(.*)$/
+    R.pipe(
+      R.map RegExp.prototype.exec.bind /^([^:]*):[ ]*(.*)$/
+      R.map R.tail
+      R.fromPairs
+    ) response_header_lines
   )
   return
 
@@ -62,5 +65,5 @@ exports.load = (scope, filename, root) ->
   .replace /^\s*--.*$\n?/gm, ''
   .split /\n{2,}/
   .filter Boolean
-  .forEach _.partial exports.mock, scope, _, root
+  .forEach (chunk) -> exports.mock scope, chunk, root
   return
