@@ -1,0 +1,20 @@
+>> POST /
+>> =username=alice&password=%23%24%25&remember_me=on
+<< 200
+<< =
+
+
+>> POST /
+>> ={"username":"alice","password":"#$%","remember_me":true}
+<< 200
+<< =
+
+
+>> POST /
+>> ={
+>> =  "username": "alice",
+>> =  "password": "#$%",
+>> =  "remember_me": true
+>> =}
+<< 200
+<< =

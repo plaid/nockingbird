@@ -26,8 +26,7 @@ exports.mock = (scope, chunk, root) ->
     else
       (if match[1] is '>>' then request_lines else response_lines).push match[2]
 
-  [main_request_line, form_data_lines...] = request_lines
-  [method_name, pathname] = main_request_line.split /[ ]+/
+  [method_name, pathname] = request_lines[0].split /[ ]+/
   unless is_method_name method_name
     throw new Error "Invalid request method \"#{method_name}\""
 
@@ -42,9 +41,17 @@ exports.mock = (scope, chunk, root) ->
         [[header_lines..., line], body_lines]
     , [[], []]
 
-  scope[method_name.toLowerCase()](
-    pathname
-    [form_data_lines.join '&'].filter(Boolean)...
+  scope[method_name.toLowerCase()].apply(
+    scope,
+    R.pipe(
+      R.tail
+      R.map RegExp::exec.bind /^=(.*)$/
+      R.pluck '1'
+      R.join '\n'
+      R.of
+      R.reject R.isEmpty
+      R.concat [pathname]
+    ) request_lines
   )[if filename? then 'replyWithFile' else 'reply'](
     Number status_code_line
     if filename?
@@ -52,7 +59,7 @@ exports.mock = (scope, chunk, root) ->
     else
       response_body_lines.join '\n'
     R.pipe(
-      R.map RegExp.prototype.exec.bind /^([^:]*):[ ]*(.*)$/
+      R.map RegExp::exec.bind /^([^:]*):[ ]*(.*)$/
       R.map R.tail
       R.fromPairs
     ) response_header_lines

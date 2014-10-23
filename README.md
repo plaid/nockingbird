@@ -88,13 +88,13 @@ Each chunk must contain one or more request lines (lines beginning with `>>`),
 in accordance with the following grammar:
 
 ```ebnf
-request lines       = main request line , { form data line } ;
+request lines       = main request line , { request body } ;
 main request line   = request prefix , method name , pathname , "\n" ;
 method name         = "GET" | "POST" | "PUT" | "HEAD" | "PATCH" | "MERGE" | "DELETE" ;
 pathname            = { any character } ;
-form data line      = request prefix , param name , "=" , param value , "\n" ;
-param name          = { any character } ;
-param value         = { any character } ;
+request body        = inline body ;
+inline body         = inline body line , { inline body line } ;
+inline body line    = request prefix , "=" , { any character } , "\n" ;
 request prefix      = ">>" , { " " } ;
 any character       = ? any character except "\n" ? ;
 ```

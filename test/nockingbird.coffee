@@ -95,3 +95,19 @@ describe 'nockingbird.load', ->
     scope = new Scope
     nockingbird.load scope, "#{__dirname}/nb/hello-world.nb"
     assert.strictEqual scope.__log__[1][1], 200
+
+  it 'parses request-bodies.nb', ->
+    scope = new Scope
+    nockingbird.load scope, "#{__dirname}/nb/request-bodies.nb"
+    assert.deepEqual scope.__log__, [
+      ['post', '/', 'username=alice&password=%23%24%25&remember_me=on']
+      ['reply', 200, '', {}]
+      ['post', '/', '{"username":"alice","password":"#$%","remember_me":true}']
+      ['reply', 200, '', {}]
+      ['post', '/', '''{
+                         "username": "alice",
+                         "password": "#$%",
+                         "remember_me": true
+                       }''']
+      ['reply', 200, '', {}]
+    ]
