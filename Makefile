@@ -3,7 +3,7 @@ MOCHA = node_modules/.bin/mocha --compilers coffee:coffee-script/register
 XYZ = node_modules/.bin/xyz --message X.Y.Z --tag X.Y.Z --repo git@github.com:plaid/nockingbird.git --script scripts/prepublish
 
 SRC = $(shell find src -name '*.coffee')
-LIB = $(patsubst src/%.coffee,lib/%.js,$(SRC))
+LIB = $(SRC:src/%.coffee=lib/%.js)
 
 
 .PHONY: all
