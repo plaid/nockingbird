@@ -8,7 +8,6 @@
     "nock",
     "test"
   ],
-  "author": "David Chambers <david@plaid.com>",
   "repository": {
     "type": "git",
     "url": "git://github.com/plaid/nockingbird.git"
