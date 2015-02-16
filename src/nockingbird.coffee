@@ -4,7 +4,7 @@ path = require 'path'
 R = require 'ramda'
 
 
-is_method_name = R.rPartial R.contains, [
+is_method_name = R.contains R.__, [
   'GET'
   'POST'
   'PUT'
