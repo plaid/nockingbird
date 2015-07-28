@@ -19,9 +19,9 @@ exports.mock = (scope, chunk, root) ->
   chunk
   .replace /\n+$/, ''
   .split /\n/
-  .map RegExp::exec.bind /^(>>|<<)\s*(.*)$/
+  .map R.match /^(>>|<<)\s*(.*)$/
   .forEach (match) ->
-    if match is null
+    if R.isEmpty match
       throw new SyntaxError 'Invalid chunk (lines must begin with ">>" or "<<")'
     else
       (if match[1] is '>>' then request_lines else response_lines).push match[2]
@@ -45,7 +45,7 @@ exports.mock = (scope, chunk, root) ->
     scope,
     R.pipe(
       R.tail
-      R.map RegExp::exec.bind /^=(.*)$/
+      R.map R.match /^=(.*)$/
       R.pluck '1'
       R.join '\n'
       R.of
@@ -59,7 +59,7 @@ exports.mock = (scope, chunk, root) ->
     else
       response_body_lines.join '\n'
     R.pipe(
-      R.map RegExp::exec.bind /^([^:]*):[ ]*(.*)$/
+      R.map R.match /^([^:]*):[ ]*(.*)$/
       R.map R.tail
       R.fromPairs
     ) response_header_lines
