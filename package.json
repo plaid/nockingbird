@@ -14,7 +14,7 @@
   },
   "main": "./lib/nockingbird",
   "dependencies": {
-    "ramda": "0.17.x"
+    "ramda": "0.18.x"
   },
   "devDependencies": {
     "coffee-script": "1.8.x",
